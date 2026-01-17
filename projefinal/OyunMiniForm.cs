@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -12,7 +12,7 @@ namespace projefinal
 {
     public partial class OyunMiniForm : Form
     {
-        int hiz = 5;
+        int hiz = 6;
         int eskiX;
         int eskiY;
         DateTime baslangicZamani;
