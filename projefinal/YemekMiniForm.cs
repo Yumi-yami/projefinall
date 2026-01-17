@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -44,32 +44,26 @@ namespace projefinal
                 puan = 0;
 
             lblPuan.Text = "Puan: " + puan;
+
+            // 👇 ESKİ KONUM
+            int eskiX = pb.Left;
+            int eskiY = pb.Top;
+
+            int yeniX, yeniY;
+
+            // 👇 YETERİNCE UZAK BİR YER BULANA KADAR DENE
+            do
+            {
+                yeniX = rnd.Next(0, this.ClientSize.Width - pb.Width);
+                yeniY = rnd.Next(40, this.ClientSize.Height - pb.Height);
+            }
+            while (Math.Abs(yeniX - eskiX) < 30 &&
+                   Math.Abs(yeniY - eskiY) < 30);
+
+            pb.Left = yeniX;
+            pb.Top = yeniY;
         }
-        void YemekOlustur(string tur)
-        {
-            PictureBox pb = new PictureBox();
-            pb.Width = 50;
-            pb.Height = 50;
-            pb.SizeMode = PictureBoxSizeMode.StretchImage;
-
-            pb.Left = rnd.Next(0, this.ClientSize.Width - pb.Width);
-            pb.Top = rnd.Next(40, this.ClientSize.Height - pb.Height);
-
-            pb.Tag = tur;
-
-            // 🔹 RESİMLER
-            if (tur == "iyi")
-                pb.Image = Image.FromFile("resimler/elma.png");
-            else if (tur == "kotu")
-                pb.Image = Image.FromFile("resimler/cikolata.png");
-            else if (tur == "bomba")
-                pb.Image = Image.FromFile("resimler/bomba.png");
-
-            pb.Click += YemekTiklandi;
-
-            this.Controls.Add(pb);
-            pb.BringToFront();
-        }
+        
         private void YemekMiniForm_Load(object sender, EventArgs e)
         {
             lblPuan.Text = "Puan: 0";
@@ -132,4 +126,3 @@ namespace projefinal
             }
         }
     }
-}
