@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -12,9 +12,7 @@ namespace projefinal
 {
     public partial class GameForm : Form
     {
-        
-        
-
+       
         public GameForm()
         {
 
@@ -47,7 +45,7 @@ namespace projefinal
             }
 
             // Diğer durumlar → üzgün
-            if (eglence < 10 || aclik < 10)
+            if (eglence <30 || aclik <30 || enerji <30 )
             {
                 pbTilki.Image = Properties.Resources.üzgün_tilki;
                 return;
@@ -124,12 +122,16 @@ namespace projefinal
 
             if (frm.ShowDialog() == DialogResult.OK)
             {
-                progressBarYemek.Value += frm.KazanilanPuan;
+                int yeniDeger = progressBarYemek.Value + frm.KazanilanPuan;
 
-                if (progressBarYemek.Value > 100)
-                    progressBarYemek.Value = 100;
-                if (progressBarYemek.Value < 0)
-                    progressBarYemek.Value = 0;
+                if (yeniDeger > progressBarYemek.Maximum)
+                    yeniDeger = progressBarYemek.Maximum;
+                else if (yeniDeger < progressBarYemek.Minimum)
+                    yeniDeger = progressBarYemek.Minimum;
+
+                progressBarYemek.Value = yeniDeger;
+
+                TilkiResmiGuncelle(); // yemek sonrası tilki güncellensin
             }
         }
 
